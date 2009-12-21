@@ -1,0 +1,25 @@
+#!/bin/bash
+
+
+    for i in $(seq 16)
+    do  echo "ssh 192.168.1.$i"
+        #ssh 192.168.1.$i "rsync -a /data/NBPP/results/root/file_lists/* clairvaux:/data6/results/root/file_lists/."
+        #ssh 192.168.1.$i "rm -rf /data/BON/work/*"
+        #ssh 192.168.1.$i "ps -elf |grep python"
+        #ssh 192.168.1.$i "rm -rf /data/NBPP/work/*"
+        #ssh 192.168.1.$i "halt"
+        #ssh 192.168.1.$i "ps  "
+        #ssh 192.168.1.$i "ls -lrt /data/BON/work/55145000  "
+        #ssh 192.168.1.$i "killall python"
+	#scp -rp /root/scripts/NBPP_presto_search.py 192.168.1.$i:/usr/local/bin/.
+	#scp -rp /root/scripts/BON_128_presto_search.py 192.168.1.$i:/usr/local/bin/.
+	#scp -rp /root/scripts/BON_128_presto_search_thd.py 192.168.1.$i:/usr/local/bin/.
+	#scp -rp /root/scripts/slave.py 192.168.1.$i:/usr/local/bin/.
+	scp -rp /root/scripts/slave.py.thd 192.168.1.$i:/usr/local/bin/slave.py
+	#scp -rp /root/presto/src/accel_utils.c 192.168.1.$i:/usr/local/presto/src/.
+	#scp -rp /root/scripts/local.start 192.168.1.$i:/etc/conf.d/.
+	#scp -rp /root/scripts/BON.zaplist 192.168.1.$i:/data/BON/.
+	#scp -rp /root/scripts/init01 192.168.1.$i:/etc/inittab
+	#scp -rp /root/hosts 192.168.1.$i:/etc/hosts
+	echo
+    done
