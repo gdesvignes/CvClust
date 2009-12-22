@@ -17,6 +17,7 @@ RESERVE   <Node>    :  Reserve a node for threaded process
 
 START   <Filename>  :  Start the cluster - Give a list of nodes
 HALT                :  Stop the cluster
+STARTNODE <Node>    :  Start a node
 HALTNODE  <Node>    :  Stop a node
 
 """
@@ -68,13 +69,9 @@ elif sys.argv[1]=='INFO':
     msg_send="INFO"
     connexion.send(msg_send)
     msg_rcv=connexion.recv(1024) # msg = "OK nb_nodes"
-    #print msg_rcv
     nb_nodes = int( msg_rcv.split()[1] )
     for i in range(nb_nodes):
         msg_rcv=connexion.recv(1024) # msg = "node_name nb_cores"
-	#print msg_rcv
-	#print 2+int(msg_rcv.split()[1])
-	#print msg_rcv.split()[2+int(msg_rcv.split()[1])]
 	# Print reserved Node
 	if (msg_rcv.split()[2+int(msg_rcv.split()[1])])=="1":
 	  print "node : %s  L"%msg_rcv.split()[0]
@@ -144,8 +141,6 @@ elif sys.argv[1]=='START':
     connexion = connect()
 
     if connexion == 'NULL':
-        # TODO : kill a previous servey.py
-        #cmd="/usr/sbin/daemonize  /usr/local/bin/server.py"
         cmd="/usr/sbin/daemonize -o /tmp/server.log -e /tmp/server.err /usr/local/bin/server.py"
         os.system(cmd)
     else:    
@@ -188,6 +183,15 @@ elif sys.argv[1]=='HALT':
     msg_rcv=connexion.recv(1024) # msg = "OK nb_nodes"
     connexion.close()
 
+elif sys.argv[1]=='STARTNODE':
+    connexion = connect()
+    if connexion=='NULL':
+        print 'No server found'
+        sys.exit()
+
+    print 'Starting slave.py on %s'%(sys.argv[2])
+    cmd="ssh %s \"/usr/local/bin/daemonize -o /tmp/slave.log -e /tmp/slave.err /usr/local/bin/slave.py\""%(sys.argv[2])
+    os.system(cmd)
 
 elif sys.argv[1]=='HALTNODE':
     connexion = connect()
