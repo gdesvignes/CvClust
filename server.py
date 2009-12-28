@@ -472,7 +472,7 @@ class ThreadNode(threading.Thread):
 	    (node_name,core_idx) = core_name.split('-')
             i=int(core_idx)
 
-	    print "%s %s %s"%(job,node_name,core_idx)
+	    print "%s %s %s %s %d\n"%(msg_rcv,job,node_name,i)
 
 	    if msg_rcv.split()[3]=='START':
 	        #print 'DEBUG : received START from node, msg=%s'%msg_rcv
@@ -486,19 +486,19 @@ class ThreadNode(threading.Thread):
 		jobs[job].t_start = get_time()
 
 	    elif msg_rcv.split()[3]=='JOIN-RFI':
-	        nodes[node_name].status[i]='BUSY - JOIN-RFI'
+	        nodes[node_name].status[i]='JOIN-RFI'
             
 	    elif msg_rcv.split()[3]=='PREP-ACCEL-SP':
-	        nodes[node_name].status[i]='BUSY - PREP-ACCEL-SP'
+	        nodes[node_name].status[i]='PREP-ACCEL-SP'
             
 	    elif msg_rcv.split()[3]=='SIFT':
-	        nodes[node_name].status[i]='BUSY - SIFT'
+	        nodes[node_name].status[i]='SIFT'
             
 	    elif msg_rcv.split()[3]=='FOLDING':
-	        nodes[node_name].status[i]='BUSY - FOLDING'
+	        nodes[node_name].status[i]='FOLDING'
             
 	    elif msg_rcv.split()[3]=='COMPRESS':
-	        nodes[node_name].status[i]='BUSY - COMPRESS'
+	        nodes[node_name].status[i]='COMPRESS'
             
 	    elif msg_rcv.split()[3]=='FINISHED':
 	        nodes[node_name].status[i]='IDLE'
