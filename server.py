@@ -472,7 +472,7 @@ class ThreadNode(threading.Thread):
 	    (node_name,core_idx) = core_name.split('-')
             i=int(core_idx)
 
-	    print "%s %s %s %s %d\n"%(msg_rcv,job,node_name,i)
+	    print "%s %s %s %d\n"%(msg_rcv,job,node_name,i)
 
 	    if msg_rcv.split()[3]=='START':
 	        #print 'DEBUG : received START from node, msg=%s'%msg_rcv
