@@ -184,10 +184,10 @@ elif sys.argv[1]=='HALT':
     connexion.close()
 
 elif sys.argv[1]=='STARTNODE':
-    connexion = connect()
-    if connexion=='NULL':
-        print 'No server found'
-        sys.exit()
+    #connexion = connect()
+    #if connexion=='NULL':
+    #    print 'No server found'
+    #    sys.exit()
 
     print 'Starting slave.py on %s'%(sys.argv[2])
     cmd="ssh %s \"/usr/local/bin/daemonize -o /tmp/slave.log -e /tmp/slave.err /usr/local/bin/slave.py\""%(sys.argv[2])
